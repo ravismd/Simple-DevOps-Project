@@ -81,15 +81,21 @@
 #### Deploying Nginx pods on Kubernetes
 1. Deploying Nginx Container
     ```sh
-    kubectl run sample-nginx --image=nginx --replicas=2 --port=80
+    kubectl run sample-nginx --image=nginx --replicas=2 --port=80 - <Somehow I could not run this commands instead I ran "kubectl create deployment nginx1 --image=nginx:1.7.9"
     # kubectl run simple-devops-project --image=yankils/simple-devops-image --replicas=2 --port=8080
     kubectl get pods
     kubectl get deployments
+    I ran twice the command to create deployment on both nodes because replicas did not work
+    "kubectl create deployment nginx1 --image=nginx:1.7.9"
+    "kubectl create deployment nginx2 --image=nginx:1.7.9"
    ```
 
 1. Expose the deployment as service. This will create an ELB in front of those 2 containers and allow us to publicly access them.
    ```sh
-   kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer
+   kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer and instead of this I ran "kubectl expose deployment nginx1 --port=80 --type=LoadBalancer"
    # kubectl expose deployment simple-devops-project --port=8080 --type=LoadBalancer
    kubectl get services -o wide
+   "kubectl expose deployment nginx1 --port=80 --type=LoadBalancer"
+   "kubectl expose deployment nginx2 --port=80 --type=LoadBalancer"
+   
    ```
